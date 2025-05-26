@@ -1,98 +1,102 @@
-# Amazon-Feature-Prioritization-
+# 🧠 Amazon Feature Prioritization Tool Using NLP
 
-# 🧠 Feature Prioritization Tool Using NLP | Amazon Product Reviews
-
-This project uses Natural Language Processing (NLP) to identify and rank product features from Amazon review data based on **frequency** and **sentiment**. It is designed to help product managers and analysts prioritize feature development and understand customer pain points at scale.
+This project uses **Natural Language Processing (NLP)** to identify and rank product features from Amazon reviews based on their **frequency** and **sentiment**. It helps product managers and analysts **prioritize features**, identify **customer pain points**, and convert qualitative feedback into data-driven insights.
 
 ---
 
 ## 🔍 Problem Statement
 
-Product teams often struggle with:
-- Prioritizing which features to build or improve.
-- Understanding what users talk about most—and how they feel about it.
+Product teams often struggle to:
+- Prioritize which features to improve or build next.
+- Understand what customers mention most frequently—and how they feel about it.
 
-This tool solves that by analyzing **real Amazon customer reviews**, extracting key **nouns (features)**, and ranking them based on how frequently they’re mentioned and how positively or negatively they're received.
+This tool automates the process by analyzing Amazon reviews, extracting key **nouns (product features)**, and ranking them based on:
+- How often they're mentioned
+- How positively (or negatively) they're received
 
 ---
 
 ## 📦 Dataset
 
-Amazon Reviews Polarity dataset from [Kaggle]([https://www.kaggle.com/datasets/bittlingmayer/amazonreviews?resource=download])
-- `train.ft.txt.bz2` — 3 million training examples
-- `test.ft.txt.bz2` — 650k testing examples  
-- Format: `__label__1` or `__label__2` followed by review text
+**Source**: [Amazon Reviews Polarity Dataset](https://www.kaggle.com/datasets/bittlingmayer/amazonreviews)  
+- `train.ft.txt.bz2`: ~3 million training examples  
+- `test.ft.txt.bz2`: ~650k testing examples  
+- Format: `__label__1` (negative) or `__label__2` (positive), followed by the review text
 
-In this project, we used a **subset of 10,000 training and 5,000 testing examples**.
+**Subset used**:
+- 10,000 reviews from the training set
+- 5,000 reviews from the test set
 
 ---
 
 ## 🛠️ Tools & Technologies
 
-- **Python**
-- **TextBlob** (sentiment analysis)
-- **SpaCy** (noun extraction & NLP preprocessing)
-- **Matplotlib** (visualizations)
-- **Pandas / BZ2** (data handling)
+- `Python` (core language)
+- `SpaCy` (NLP & noun extraction)
+- `TextBlob` (sentiment analysis)
+- `Pandas`, `BZ2` (data wrangling)
+- `Matplotlib` (visualizations)
 
 ---
 
 ## ⚙️ How It Works
 
-### 1. **Train Phase**
-- Load and clean Amazon review data.
-- Extract most common **nouns** from the training set.
-- Score features: `frequency × average sentiment`.
+1. **Data Loading**  
+   Extract reviews from compressed `.bz2` files, clean them, and assign sentiment labels.
 
-### 2. **Test Phase**
-- Use extracted features on the test set.
-- Check how they're discussed in new reviews.
-- Score & rank again based on fresh feedback.
+2. **Noun Feature Extraction**  
+   Use SpaCy to extract key nouns from each review (lemmatized, lowercased, and filtered).
+
+3. **Sentiment Scoring**  
+   Analyze review sentiment using TextBlob, and assign a polarity score (−1 to +1).
+
+4. **Feature Scoring & Ranking**  
+   For each frequent noun:
+   - Count how often it appears
+   - Calculate its average sentiment
+   - Compute a **Priority Score = Frequency × Avg. Sentiment**
+
+5. **Visualization**  
+   Generate a bar chart ranking features by normalized priority score.
 
 ---
 
-## 📈 Output
+## 📈 Sample Output
 
-Top-ranked features from the test data:
+| Feature   | Frequency | Avg Sentiment | Priority Score |
+|-----------|-----------|----------------|----------------|
+| book      | 1653      | 0.158          | 260.72         |
+| time      | 1124      | 0.151          | 170.17         |
+| story     | 661       | 0.177          | 116.72         |
+| music     | 354       | 0.236          | 83.38          |
+| product   | 379       | 0.140          | 52.92          |
 
-| Feature | Frequency | Sentiment | Priority Score |
-|---------|-----------|-----------|----------------|
-| `book`  | 1653      | 0.158     | 260.72         |
-| `time`  | 1124      | 0.151     | 170.17         |
-| `story` | 661       | 0.177     | 116.72         |
-| `music` | 354       | 0.236     | 83.38          |
-| `product` | 379     | 0.140     | 52.92          |
+📊 **Bar Chart**: Visualizes top features based on sentiment-weighted importance.
 
-📤 CSV Export: `amazon_feature_priority_test_scored.csv`  
-📊 Visualization: Bar chart of features by priority score.
+📤 **CSV Output**: `amazon_feature_priority_test_scored.csv`
 
 ---
 
 ## ✅ Business Value
 
-- Helps product managers and analysts **quantify qualitative feedback**
-- Reveals **which features users care about** and how they feel
-- Can be adapted to **Jira tickets, app reviews, or surveys**
+- Turns messy review data into structured, decision-ready insights
+- Helps product teams prioritize based on real customer voice
+- Adaptable for other use cases: app reviews, support tickets, surveys, etc.
 
 ---
 
-## 🚀 Future Improvements
+## 🚀 Future Work (Optional Ideas)
 
-- Streamlit dashboard for interactive prioritization
-- Multi-language support (using `langdetect` + translation APIs)
-- Topic modeling (LDA) or clustering by feature group
-- Support tickets or app store reviews integration
+- Build a **Streamlit dashboard** for interactive exploration  
+- Add **multi-language support** using `langdetect` + translation APIs  
+- Use **LDA topic modeling** to group related features  
+- Apply this pipeline to **mobile app reviews** or **support tickets**
 
 ---
 
 ## 👤 Author
 
 **Nithin Adru**  
-📧 [nithin.adru@email.ucr.edu](mailto:nithin.adru@email.ucr.edu)  
-🔗 [LinkedIn](https://www.linkedin.com/in/nithin-adru)
+📧 nithin.adru@email.ucr.edu  
+🔗 [LinkedIn](#)
 
----
-
-## 📜 License
-
-MIT License
