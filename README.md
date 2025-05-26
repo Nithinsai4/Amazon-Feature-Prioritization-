@@ -18,7 +18,7 @@ This tool solves that by analyzing **real Amazon customer reviews**, extracting 
 
 ## 📦 Dataset
 
-Amazon Reviews Polarity dataset from [FastText](https://fasttext.cc/docs/en/supervised-tutorial.html):
+Amazon Reviews Polarity dataset from [Kaggle]([https://www.kaggle.com/datasets/bittlingmayer/amazonreviews?resource=download])
 - `train.ft.txt.bz2` — 3 million training examples
 - `test.ft.txt.bz2` — 650k testing examples  
 - Format: `__label__1` or `__label__2` followed by review text
