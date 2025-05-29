@@ -98,5 +98,4 @@ This tool automates the process by analyzing Amazon reviews, extracting key **no
 
 **Nithin Adru**  
 📧 nithin.adru@email.ucr.edu  
-🔗 [LinkedIn](#)
 
